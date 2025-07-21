@@ -24,4 +24,15 @@ $routes->group('admin', ['filter' => 'authcheck'], function($routes) {
 
 
 $routes->post('users/register', 'AdminUser::register');
-$routes->post('users/login', 'AdminUser::login');   
+$routes->post('users/login', 'AdminUser::login');
+
+$routes->group('cars', function($routes) {
+    $routes->get('/', 'Cars::index'); // GET /cars
+    $routes->get('make/(:segment)', 'Cars::getByMake/$1'); // GET /cars/make/{make}
+    $routes->get('(:num)', 'Cars::show/$1'); // GET /cars/{id}
+    $routes->post('/', 'Cars::create'); // POST /cars
+    $routes->put('(:num)', 'Cars::update/$1'); // PUT /cars/{id}
+    $routes->patch('(:num)', 'Cars::patch/$1'); // PATCH /cars/{id}
+    $routes->delete('(:num)', 'Cars::delete/$1'); // DELETE /cars/{id}
+    $routes->post('search', 'Cars::search'); // POST /cars/search
+});
